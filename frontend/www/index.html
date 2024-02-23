@@ -8,12 +8,33 @@
 </head>
 
 <body>
-    <h1 style="background-color:aliceblue;">Esse web app está sendo executado dentro de um container!</h1>
+    <h1 style="background-color:aliceblue;">Esse web app está sendo executado de um container!</h1>
     <p style="background-color:lightcoral;">O container foi criado através de um Dockerfile.</p>
     <p style="background-color:lightblue;">Camada FRONTEND.</p>
     <input type="button" onclick="getTimes()" value="Times de Futebol">
     <div id="todos"></div>
 
+    <script>
+        globalCounter = 0;
+        function getTimes() {
+            globalCounter++;
+            fetch("http://localhost:8000/?id=2")
+                .then((response) => response.json())
+                .then((data) => {
+                    const todos = document.getElementById("todos");
+                    todos.innerHTML=""
+                    Object.keys(data)
+                        .forEach(function eachKey(key) {
+                            const todo = document.createElement("h4");
+                            todo.textContent = key + ": " + data[key];
+                            todos.appendChild(todo);
+                        });
+                })
+                .catch((error) => {
+                    console.log("Error: ", error);
+                });
+        }
+    </script>
 </body>
 
 </html>
