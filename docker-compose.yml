@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  frontend:
+    image: httpd:2.4
+    container_name: frontend
+    volumes:
+      - "./frontend/www:/usr/local/apache2/htdocs/"
+    ports:
+      - 3000:80
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    volumes:
+      - "./backend/www:/var/www/html/"
+    ports:
+      - 8000:80
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    container_name: database
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./database/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: password!123
+      MYSQL_DATABASE: baseteste
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: password!123
+    ports:
+      - "3306:3306"
