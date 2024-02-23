@@ -1,10 +1,8 @@
 version: "3.9"
 services:
   frontend:
-    image: httpd:2.4
+    image: frontend:1.0
     container_name: frontend
-    volumes:
-      - "./frontend/www:/usr/local/apache2/htdocs/"
     ports:
       - 3000:80
 
