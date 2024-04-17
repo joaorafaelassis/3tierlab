@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DESAFIO INFRA ESTRUTURA DE BANCO DE DADOS</title>
+    <title>DESAFIO 3 TIER</title>
 </head>
 
 <body>
     <h1 style="background-color:aliceblue;">Esse web app está sendo executado de um container!</h1>
     <p style="background-color:lightcoral;">O container foi criado através de um Dockerfile.</p>
-    <p style="background-color:lightblue;">Camada FRONTEND.</p>
+    <p style="background-color:lightblue;">Camada FRONTEND alterada!</p>
     <input type="button" onclick="getTimes()" value="Times de Futebol">
     <div id="todos"></div>
 
@@ -18,7 +18,7 @@
         globalCounter = 0;
         function getTimes() {
             globalCounter++;
-            fetch("http://localhost:8000/")
+            fetch("http://172.20.132.191:8000/")
                 .then((response) => response.json())
                 .then((data) => {
                     const todos = document.getElementById("todos");
